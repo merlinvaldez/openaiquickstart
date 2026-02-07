@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@openai/agents": "^0.4.6",
+    "zod": "^4.3.6"
+  }
+}
