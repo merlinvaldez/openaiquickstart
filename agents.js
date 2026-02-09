@@ -2,6 +2,7 @@ import { Agent, run } from "@openai/agents";
 import { readFile } from "node:fs/promises";
 
 const modelChoice = "gpt-5.2";
+const modelSettings = { reasoning: { effort: "low" } };
 
 const simplifierInstructions = await readFile(
   new URL("./simplifierAgent.txt", import.meta.url),
@@ -31,6 +32,7 @@ Upon enactment, the bill rescinds all funds appropriated for the ICC and prohibi
 const simplifierAgent = new Agent({
   name: "Simplifier agent",
   model: modelChoice,
+  modelSettings: modelSettings,
   instructions: simplifierInstructions,
 });
 
@@ -47,6 +49,7 @@ const tweetInput = [
 const tweetMakerAgent = new Agent({
   name: "TweetMaker Agent",
   model: modelChoice,
+  modelSettings: modelSettings,
   instructions: tweetMakerInstructions,
 });
 
@@ -55,6 +58,7 @@ const tweetResult = await run(tweetMakerAgent, tweetInput);
 const sanitizerAgent = new Agent({
   name: "Sanitizer Agent",
   model: modelChoice,
+  modelSettings: modelSettings,
   instructions: sanitizerInstructions,
 });
 
